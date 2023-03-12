@@ -22,10 +22,10 @@ tasksRouter.post('/', (req, res) => {
     let newTasks = req.body;
     console.log('inside of add tasks POST', newTasks);
 
-    const queryText = `INSERT INTO "tasks" ("tasks", "completed", "notes")
-    VALUES ($1, $2, $3);`;
+    const queryText = `INSERT INTO "tasks" ("tasks", "notes")
+    VALUES ($1, $2);`;
 
-    pool.query(queryText, [newTasks.tasks, newTasks.completed, newTasks.notes])
+    pool.query(queryText, [newTasks.tasks, newTasks.notes])
         .then((results) => {
             res.sendStatus(200);
             console.log('POST WORKED', results)
@@ -51,6 +51,25 @@ tasksRouter.delete('/:id', (req,res) => {
         })
 })
 
+tasksRouter.put('/changeComplete/:id', (req, res) => {
+    const taskId = req.params.id;
+    console.log('Update changeComplete:', req.params.id);
 
+    let newValue = req.body.thing
+
+    const sqlText = `
+        UPDATE "tasks" SET "completed" = $2 WHERE "id"=$1; 
+    `;
+
+    pool.query(sqlText, [taskId, newValue])
+    .then((result) => {
+        console.log("Update successful for taskId:", taskId);
+        res.sendStatus(200);  
+    }).catch((error) => {
+        console.log('Error making update to taskId:', taskId, error);
+        console.log('Update sqlText:', sqlText);
+        res.sendStatus(500);
+    })
+});
 
 module.exports = tasksRouter;
