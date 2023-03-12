@@ -30,7 +30,6 @@ function enterTask () {
     let tasks =
     {
         tasks: $('#taskInput').val(),
-        completed: $('#completedInput').val(),
         notes: $('#noteInput').val()
     }
     //send values to server

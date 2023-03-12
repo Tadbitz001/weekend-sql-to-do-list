@@ -22,10 +22,10 @@ tasksRouter.post('/', (req, res) => {
     let newTasks = req.body;
     console.log('inside of add tasks POST', newTasks);
 
-    const queryText = `INSERT INTO "tasks" ("tasks", "completed", "notes")
-    VALUES ($1, $2, $3);`;
+    const queryText = `INSERT INTO "tasks" ("tasks", "notes")
+    VALUES ($1, $2);`;
 
-    pool.query(queryText, [newTasks.tasks, newTasks.completed, newTasks.notes])
+    pool.query(queryText, [newTasks.tasks, newTasks.notes])
         .then((results) => {
             res.sendStatus(200);
             console.log('POST WORKED', results)
