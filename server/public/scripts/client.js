@@ -5,7 +5,7 @@ function getReady () {
 
     $('#submitBtn').on('click', enterTask);
     getTasks();
-
+    $('#displayResults').on('click', '#deleteBtn', deleteTasks);
 }
 
 function getTasks() {
@@ -62,5 +62,23 @@ function renderTasks (input) {
       <td><button id="transferBtn">completed</button></td>
     </td>
     `);
+
+}
+
+function deleteTasks () {
+    console.log("Inside of deleteTasks");
+
+    const idToDelete = $(this).parent().parent().data().id;
+    console.log("Id to delete: ", idToDelete);
+
+    $.ajax({
+        method: 'DELETE',
+        url: `/tasks/${idToDelete}`
+      }).then((response) => {
+        console.log("Deletion completed for id :", idToDelete);
+        getTasks();
+      }).catch((error) => {
+        console.log("Error making DB deletion for id: ", idToDelete, error)
+      })
 
 }

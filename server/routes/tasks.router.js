@@ -36,7 +36,20 @@ tasksRouter.post('/', (req, res) => {
         });
 });
 
+tasksRouter.delete('/:id', (req,res) => {
+    console.log("Inside of /:id, DELETE request: ");
+    const idToDelete = req.params.id;
+    const sqlToDelete = 'DELETE FROM tasks WHERE id=$1'
 
+        pool.query(sqlToDelete, [idToDelete])
+        .then((result) => {
+            console.log("Successful deletion ", idToDelete);
+            res.sendStatus(200)
+        }).catch((error) => {
+            console.log(`Error in making query:, ${sqlText}`, error)
+            res.sendStatus(500)
+        })
+})
 
 
 
