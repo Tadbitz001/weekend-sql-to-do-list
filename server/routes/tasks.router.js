@@ -51,6 +51,25 @@ tasksRouter.delete('/:id', (req,res) => {
         })
 })
 
+tasksRouter.put('/changeComplete/:id', (req, res) => {
+    const taskId = req.params.id;
+    console.log('Update changeComplete:', req.params.id);
 
+    let newValue = req.body.thing
+
+    const sqlText = `
+        UPDATE "tasks" SET "completed" = $2 WHERE "id"=$1; 
+    `;
+
+    pool.query(sqlText, [taskId, newValue])
+    .then((result) => {
+        console.log("Update successful for taskId:", taskId);
+        res.sendStatus(200);  
+    }).catch((error) => {
+        console.log('Error making update to taskId:', taskId, error);
+        console.log('Update sqlText:', sqlText);
+        res.sendStatus(500);
+    })
+});
 
 module.exports = tasksRouter;

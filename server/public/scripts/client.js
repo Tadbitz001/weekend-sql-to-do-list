@@ -6,7 +6,10 @@ function getReady () {
     $('#submitBtn').on('click', enterTask);
     getTasks();
     $('#displayResults').on('click', '#deleteBtn', deleteTasks);
+    $('#displayResults').on('click', '#changeBtn', changeComplete);
+
 }
+let tasks = [];
 
 function getTasks() {
     console.log('in getTasks');
@@ -15,9 +18,10 @@ function getTasks() {
       type: 'GET',
       url: '/tasks',
     }).then((response) => {
-      console.log(response);
+        tasks = response;
+      console.log(tasks);
       //will need to make a renderTasks function
-      renderTasks(response);
+      renderTasks();
     }).catch((error) => {
       console.log('error in GET', error);
     });
@@ -46,19 +50,19 @@ function enterTask () {
 }
 
 
-function renderTasks (input) {
-    console.log("Inside renderTasks", input)
+function renderTasks () {
+    console.log("Inside renderTasks")
     //empty display before appending
     $('#displayResults').empty();
 
-    for (let task of input)
+    for (let task of tasks)
     $('#displayResults').append(`
     <tr data-id=${task.id}>
       <td>${task.tasks} </td>
       <td>${task.completed} </td>
       <td>${task.notes}</td>
       <td><button id="deleteBtn">Delete</button></td>
-      <td><button id="transferBtn">completed</button></td>
+      <td><button id="changeBtn">completed</button></td>
     </td>
     `);
 
@@ -81,3 +85,26 @@ function deleteTasks () {
       })
 
 }
+
+function changeComplete() {
+    console.log('Inside changeComplete()', $(this));
+    const idToUpdate = $(this).parent().parent().data().id; 
+    console.log('Id to update:', idToUpdate);
+    
+    let bool;
+     for (let task of tasks) {
+        if (task.id === Number(idToUpdate)) {
+            bool = task.completed;
+        }
+     }
+        
+    $.ajax({
+      method: 'PUT',
+      url: `/tasks/changeComplete/${idToUpdate}`,
+      data: {thing: !bool}
+    }).then((response) => {
+      getTasks();
+    }).catch((error) => {
+      alert('error on changeComplete route', error);
+    })
+  }
