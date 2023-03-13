@@ -1,7 +1,9 @@
 header {
     background-color: goldenrod;
-    padding:1em;
-    margin-bottom: 1em;
+    padding:40px;
+    margin-bottom: 50px;
+    text-align: center;
+    color: aliceblue;
 }
 
 h1 {
@@ -9,8 +11,62 @@ h1 {
 
 }
 
+h2 {
+    font-size: 40px;
+ 
+ }
+
 body {
     background-color: bisque;
     font-family: cursive, 'Arial Narrow', Arial, sans-serif
 
 }
+
+.div {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.head {
+    font-size: 25px;
+}
+.red-row {
+    background-color: rgb(236, 100, 100); 
+  }
+  
+.green-row {
+    background-color: rgb(93, 231, 93); 
+}
+  
+table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    font-size: 20px;
+}
+  
+th, td {
+    padding: 12px 16px;
+    text-align: left;
+}
+  
+th {
+    background-color: goldenrod;
+    color: #fff;
+}
+  
+tr:hover {
+    background-color: #ddd;
+}
+  
+th:nth-child(1),
+td:nth-child(1) {
+  width: 400px;
+}
+th:nth-child(4),
+td:nth-child(4) {
+  width: 400px;
+}
+ 

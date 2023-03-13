@@ -14,25 +14,29 @@
     <div class="div"><h1>Things You Need To Do.....</h1></div>
     </header>
     <div class="div">
-        <input id="taskInput" type="text" placeholder="Enter Tasks">
-        <input id="noteInput" type="text" placeholder="Notes">
+        <input id="taskInput" type="text" placeholder="Enter Tasks" size="30" maxlength="100">
+        <input id="noteInput" type="text" placeholder="Notes" size="30">
         <button id="submitBtn">Submit</button>
     </div>
+    <div class="div">
     <section>
         <h2>You've gotta get these things done.</h2>
         <table>
           <thead>
             <tr>
-              <th>Tasks</th>
-              <th>Completed</th>
-              <th>Notes</th>
+              <th class="head">Tasks</th>
+              <th class="head">Complete</th>
+              <th class="head">Click to change</th>
+              <th class="head">Notes</th>
+              <th class="head">Click to Delete</th>
+
             </tr>
           </thead>
           <tbody id="displayResults">
           </tbody>
         </table>
       </section>
-
+    </div>
 
 </body>
 </html>

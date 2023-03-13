@@ -55,17 +55,20 @@ function renderTasks () {
     //empty display before appending
     $('#displayResults').empty();
 
-    for (let task of tasks)
+    for (let task of tasks) {
+        const rowClass = task.completed ? "green-row" : "red-row";
+
     $('#displayResults').append(`
-    <tr data-id=${task.id}>
+    <tr data-id=${task.id} class="${rowClass}">
       <td>${task.tasks} </td>
-      <td>${task.completed} </td>
+      <td>${task.completed} 
+      <td><button id="changeBtn">Completed</button></td></td>
       <td>${task.notes}</td>
       <td><button id="deleteBtn">Delete</button></td>
-      <td><button id="changeBtn">completed</button></td>
+      
     </td>
     `);
-
+    }
 }
 
 function deleteTasks () {
