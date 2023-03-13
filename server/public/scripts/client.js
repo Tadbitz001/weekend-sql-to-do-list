@@ -2,7 +2,7 @@ $(document).ready(getReady);
 
 function getReady () {
     console.log("Inside of getReady")
-
+    //create selectors for clickbutton
     $('#submitBtn').on('click', enterTask);
     getTasks();
     $('#displayResults').on('click', '#deleteBtn', deleteTasks);
@@ -19,7 +19,7 @@ function getTasks() {
       url: '/tasks',
     }).then((response) => {
         tasks = response;
-      console.log(tasks);
+      console.log("Inside of response, now task:", tasks);
       //will need to make a renderTasks function
       renderTasks();
     }).catch((error) => {
@@ -44,6 +44,8 @@ function enterTask () {
     }).then((response) => {
         console.log("The ajax post worked.")
         getTasks();
+        $('#taskInput').val('');
+        $('#noteInput').val('');
     })
 
 

@@ -4,7 +4,7 @@ const tasksRouter = express.Router();
 const pool =require('../modules/pool');
 
 
-
+//GET route to retrieve data from database using pool
 tasksRouter.get('/', (req, res) => {
     console.log("Inside of tasksRouter");
     let queryText = 'SELECT * from "tasks" ORDER by "id";';
@@ -21,7 +21,7 @@ tasksRouter.get('/', (req, res) => {
 tasksRouter.post('/', (req, res) => {
     let newTasks = req.body;
     console.log('inside of add tasks POST', newTasks);
-
+    //SQL command to insert into
     const queryText = `INSERT INTO "tasks" ("tasks", "notes")
     VALUES ($1, $2);`;
 
