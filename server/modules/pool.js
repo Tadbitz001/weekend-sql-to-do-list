@@ -1,10 +1,23 @@
 const pg = require('pg');
+let pool;
 
-// DB CONNECTION
-const pool = new pg.Pool({
-    database: 'SQL_To_do',
-    host: 'localhost',
-    port: 5432
-});
+if (process.env.DATABASE_URL) {
+    pool = new pg.Pool({
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+            rejectUnauthorized: flase
+        }
+    });
+}
+else { 
+    pool = new pg.Pool({
+        database: 'SQL_To_do',
+        host: 'localhost',
+        port: 5432
+    });
+}
+        
+  
+
 
 module.exports = pool;
