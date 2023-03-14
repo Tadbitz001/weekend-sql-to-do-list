@@ -5,7 +5,7 @@ if (process.env.DATABASE_URL) {
     pool = new pg.Pool({
         connectionString: process.env.DATABASE_URL,
         ssl: {
-            rejectUnauthorized: flase
+            rejectUnauthorized: false
         }
     });
 }
